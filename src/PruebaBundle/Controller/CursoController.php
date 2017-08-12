@@ -81,7 +81,21 @@ class CursoController extends Controller
                 "curso" => $cursos,
                 "personaCurso" => $personaCurso
             ));
+            return $this->render('PruebaBundle:curso:default.html.twig',array(
+            "personaCurso" => $personaCurso,
+            "form" => $form->createView()
+            ));
         }
+        $personaCurso=$this->getDoctrine()
+            ->getRepository('PruebaBundle:PersonaCurso')
+            ->findAll();
+        $cursos=$this->getDoctrine()
+            ->getRepository('PruebaBundle:Curso')
+            ->findAll();
+         return $this->render('PruebaBundle:curso:add.html.twig',array(
+            "personaCurso" => $personaCurso,
+            "form" => $form->createView()
+            ));
     }
 
     public function editAction($id,Request $request)

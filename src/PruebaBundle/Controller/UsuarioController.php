@@ -76,7 +76,7 @@ class UsuarioController extends Controller
             ->getRepository('PruebaBundle:Persona')
             ->findAll();
         $this->session->getFlashBag()->add("status",$status);
-        return $this->render('PruebaBundle:Default:index.html.twig',array(
+        return $this->render('PruebaBundle:usuario:login.html.twig',array(
             "error" => $error,
             "last_username" => $lastUsername,
             "persona" => $persona,

@@ -17,3 +17,7 @@ Instalación:
 4.- Montar la aplicacion en el servidor de prueba 
 
 	php bin/console server:run
+
+5.- Ir al navegador a la direccion:
+
+	http://127.0.0.1:8000/login
