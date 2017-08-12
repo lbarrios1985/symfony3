@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Usuario" table="usuario">
+    <indexes>
+      <index name="IDX_2265B05DF5F88DB9" columns="persona_id"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="usuario_nombre_key" columns="nombre"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+      <sequence-generator sequence-name="usuario_id_seq" allocation-size="1" initial-value="1"/>
+    </id>
+    <field name="nombre" type="string" column="nombre" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="correo" type="string" column="correo" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="clave" type="string" column="clave" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="persona" target-entity="Persona" fetch="LAZY">
+      <join-columns>
+        <join-column name="persona_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

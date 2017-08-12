@@ -1,0 +1,20 @@
+PruebaBundle\Entity\Curso:
+    type: entity
+    table: curso
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        curso:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+    lifecycleCallbacks: {  }

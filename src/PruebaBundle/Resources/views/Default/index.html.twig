@@ -1,0 +1,30 @@
+{%extends "PruebaBundle::layout.html.twig"%}
+{%block body%}
+	{%for message in app.session.flashbag().get('status')%}
+		<div class="alert alert-success">{{message}}</div>
+	{%endfor%}
+
+	<table class="table table-striped">
+		<caption>Usuarios Registrados</caption>
+			<thead> 
+				<tr> 
+					<th>#</th> 
+					<th>Persona</th>
+					<th>Acción</th>
+				<th></th> 
+				</tr> 
+			</thead> 
+		<tbody>
+			{% for per in persona%} 
+			<tr> 
+				<th scope="row">{{per.id}}</th> 
+				<td>{{per.nombre}}</td>
+				<td>
+					<a href="/persona/edit/{{per.id}}" class="btn btn-default"> Editar</a>
+					<a href="/persona/delete/{{per.id}}" class="btn btn-danger"> Eliminar</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody> 
+	</table>
+{%endblock%}

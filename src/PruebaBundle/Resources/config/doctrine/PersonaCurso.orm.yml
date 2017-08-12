@@ -1,0 +1,41 @@
+PruebaBundle\Entity\PersonaCurso:
+    type: entity
+    table: persona_curso
+    indexes:
+        IDX_24FA42C9F5F88DB9:
+            columns:
+                - persona_id
+        IDX_24FA42C987CB4A1F:
+            columns:
+                - curso_id
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    manyToOne:
+        curso:
+            targetEntity: Curso
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                curso_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        persona:
+            targetEntity: Persona
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                persona_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

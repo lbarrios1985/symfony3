@@ -1,0 +1,34 @@
+{%extends "PruebaBundle::layout.html.twig"%}
+{% block body %}
+	{%for message in app.session.flashbag().get('status')%}
+		<div class="alert alert-success">{{message}}</div>
+	{%endfor%}
+
+	<h2 class = "page-header"> Agrega Telefono
+		<a href="telefono/add" class="btn btn-success"> AGREGAR</a>
+
+	</h2>
+	<table class="table table-striped">
+		<caption>Telefonos Registrados de: {{app.user.nombre}}</caption>
+			<thead> 
+				<tr> 
+					<th>#</th> 
+					<th>Telefono</th> 
+					<th>Acción</th>
+				<th></th> 
+				</tr> 
+			</thead> 
+		<tbody>
+			{% for cur in telefono%} 
+			<tr> 
+				<th scope="row">{{cur.id}}</th> 
+				<td>{{cur.telefono}}</td> 
+				<td>
+					<a href="telefono/edit/{{cur.id}}" class="btn btn-default"> Editar</a>
+					<a href="telefono/delete/{{cur.id}}" class="btn btn-danger"> Eliminar</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody> 
+	</table>
+{% endblock %}

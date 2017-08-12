@@ -1,0 +1,36 @@
+{%extends "PruebaBundle::layout.html.twig"%}
+{%block body%}
+
+	<div class = "col-lg-4">
+		<h2> Ingresar</h2>
+		<h2/>
+		<form action="{{path("login_check")}}" method="post">
+			<label>Usuario:</label>
+			<input type="text" id ="username" name="_username" value="{{last_username}}" class="form-control" />
+			<br/>
+			<label>Contraseña</label>
+			<input type="password" id ="password" name="_password" class="form-control" />
+			</br>
+			<input type="submit" value="Entrar" class="btn btn-success" />
+			{%if app.user !=null%}
+				<input type="hidden" name="_target_path" value="/login" />
+			{%endif%}
+			{%if app.user ==null%}
+				<input type="hidden" name="_target_path" value="/index" />
+			{%endif%}
+			
+			
+		</form>
+	</div>
+
+	<div class = "col-lg-4">
+		<h2> Registrarse</h2>
+		<hr/>
+			{%for message in app.session.flashbag().get('status')%}
+				<div class="alert alert-success">{{message}}</div>
+			{%endfor%}
+			{{form_start(form)}}
+			{{form_end(form)}}
+	</div>
+
+{%endblock%}

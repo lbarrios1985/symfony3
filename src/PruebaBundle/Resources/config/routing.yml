@@ -1,0 +1,74 @@
+login:
+  path: /login
+  defaults: { _controller: PruebaBundle:Usuario:login}
+
+login_check:
+  path: /login_check
+
+logout:
+  path: /logout
+
+prueba_homepage:
+    path:     /index
+    defaults: { _controller: PruebaBundle:Default:index }
+
+
+add_persona:
+  path: /persona/add
+  defaults: { _controller: PruebaBundle:Persona:add }
+
+edit_persona:
+  path: /persona/edit/{id}
+  defaults: { _controller: PruebaBundle:Persona:edit }
+
+delete_persona:
+  path: /persona/delete/{id}
+  defaults: { _controller: PruebaBundle:Persona:delete }
+
+curso:
+  path: /curso
+  defaults: { _controller: PruebaBundle:Curso:default }
+
+add_curso:
+  path: curso/add
+  defaults: { _controller: PruebaBundle:Curso:add }
+
+edit_curso:
+  path: /edit/{id}
+  defaults: { _controller: PruebaBundle:Curso:edit }
+
+delete_curso:
+  path: /delete/{id}
+  defaults: { _controller: PruebaBundle:Curso:delete }
+
+inscribir_curso:
+  path: /inscribir/{id_curso}/{id_persona}
+  defaults: { _controller: PruebaBundle:Curso:inscribir }
+
+telefono:
+  path: /telefono
+  defaults: { _controller: PruebaBundle:Telefono:default }
+
+add_telefono:
+  path: telefono/add
+  defaults: { _controller: PruebaBundle:Telefono:add }
+
+edit_telefono:
+  path: telefono/edit/{id}
+  defaults: { _controller: PruebaBundle:Telefono:edit }
+
+delete_telefono:
+  path: telefono/delete/{id}
+  defaults: { _controller: PruebaBundle:Telefono:delete }
+
+reportes:
+  path: /reportes
+  defaults: { _controller: PruebaBundle:Reportes:default }
+
+reportes_pdf:
+  path: /reportes_pdf
+  defaults: { _controller: PruebaBundle:Reportes:reportes_pdf }
+
+reportes_excel:
+  path: /reportes_excel
+  defaults: { _controller: PruebaBundle:Reportes:reportes_excel }

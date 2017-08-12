@@ -1,0 +1,11 @@
+{%extends "PruebaBundle::layout.html.twig"%}
+{% block body %}
+	{%for message in app.session.flashbag().get('status')%}
+		<div class="alert alert-success">{{message}}</div>
+	{%endfor%}
+
+
+	<a href="reportes_excel" class="btn btn-success"> Generar Excel</a>
+	<a href="reportes_pdf" class="btn btn-info"> Generar PDF</a>
+
+{% endblock %}
