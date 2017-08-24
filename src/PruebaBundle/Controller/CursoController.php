@@ -21,7 +21,7 @@ class CursoController extends Controller
         $this->session = new Session();
     }
 
-    public function defaultAction()
+    public function defaultAction(Request $request)
     {
         $personaCurso=$this->getDoctrine()
             ->getRepository('PruebaBundle:PersonaCurso')
@@ -92,7 +92,7 @@ class CursoController extends Controller
         $cursos=$this->getDoctrine()
             ->getRepository('PruebaBundle:Curso')
             ->findAll();
-         return $this->render('PruebaBundle:curso:add.html.twig',array(
+        return $this->render('PruebaBundle:curso:add.html.twig',array(
             "personaCurso" => $personaCurso,
             "form" => $form->createView()
             ));
@@ -139,6 +139,17 @@ class CursoController extends Controller
                 "personaCurso" => $personaCurso
             ));
         }
+        $personaCurso=$this->getDoctrine()
+            ->getRepository('PruebaBundle:PersonaCurso')
+            ->findAll();
+        $cursos=$this->getDoctrine()
+            ->getRepository('PruebaBundle:Curso')
+            ->findAll();
+        return $this->render('PruebaBundle:curso:edit.html.twig',array(
+            "personaCurso" => $personaCurso,
+            "curso" => $curso,
+            "form" => $form->createView()
+            ));
     }
 
 
@@ -166,7 +177,7 @@ class CursoController extends Controller
             ));
     }
 
-    public function inscribirAction($id_curso,$id_persona,Request $request)
+    public function inscribirAction($id_curso,$id_persona)
     {
         $curso=$this->getDoctrine()
             ->getRepository('PruebaBundle:Curso')
@@ -191,16 +202,7 @@ class CursoController extends Controller
             $status = "No se ha Inscrito Correctamente el curso";
         }
         $this->session->getFlashBag()->add("status",$status);
-        $personaCurso=$this->getDoctrine()
-            ->getRepository('PruebaBundle:PersonaCurso')
-            ->findAll();
-        $cursos=$this->getDoctrine()
-            ->getRepository('PruebaBundle:Curso')
-            ->findAll();
-
-        return $this->redirectToRoute('curso',array(
-                "curso" => $cursos,
-                "personaCurso" => $personaCurso
-            ));
+        
+        return $this->redirectToRoute('curso');
     }
 }

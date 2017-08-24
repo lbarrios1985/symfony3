@@ -3,6 +3,10 @@
 
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<script
+			  src="https://code.jquery.com/jquery-3.2.1.js"
+			  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+			  crossorigin="anonymous"></script>
 
 	{%for message in app.session.flashbag().get('status')%}
 		<div class="alert alert-success">{{message}}</div>
@@ -24,74 +28,37 @@
 				</tr> 
 			</thead> 
 		<tbody>
-			{% for cur in curso%} 
-			<tr>
-				{%if personaCurso%} 
-					{% for percur in personaCurso%}
-						{%if cur.curso != percur.curso%} 
-							<th scope="row">{{cur.id}}</th> 
-							<td>{{cur.curso}}</td> 
+
+			{% for cur in curso%}
+				<tr>
+				<th scope="row">{{cur.id}}</th> 
+				<td>{{cur.curso}}</td>
+				{%if personaCurso%}
+					{% for per in personaCurso %}
+						{%if cur.id!=per.curso.id%}
 							<td>
-							<a href="inscribir/{{cur.id}}/{{app.user.persona.id}}" class="btn btn-success"> Inscribir</a>
-							<a href="edit/{{cur.id}}" class="btn btn-default"> Editar</a>
-							<a href="delete/{{cur.id}}" class="btn btn-danger"> Retirar</a>
+								<a href="inscribir/{{cur.id}}/{{app.user.persona.id}}" class="btn btn-success"> Inscribir</a>
+								<a href="edit/{{cur.id}}" class="btn btn-default"> Editar</a>
 							</td>
-						{%else%}
-							<th scope="row">{{cur.id}}</th> 
-							<td>{{cur.curso}}</td> 
+						{%elseif cur.id==per.curso.id%}
 							<td>
-							<a href="edit/{{cur.id}}" class="btn btn-default"> Editar</a>
-							<a href="delete/{{cur.id}}" class="btn btn-danger"> Retirar</a>
+								<a href="edit/{{cur.id}}" class="btn btn-default"> Editar</a>
+								<a href="delete/{{cur.id}}" class="btn btn-danger"> Retirar</a>
 							</td>
 						{%endif%}
 					{% endfor %}
+					</tr>
 				{%else%}
-						<th scope="row">{{cur.id}}</th> 
-						<td>{{cur.curso}}</td> 
-						<td>
+					<td>
 						<a href="inscribir/{{cur.id}}/{{app.user.persona.id}}" class="btn btn-success"> Inscribir</a>
 						<a href="edit/{{cur.id}}" class="btn btn-default"> Editar</a>
-						<a href="delete/{{cur.id}}" class="btn btn-danger"> Retirar</a>
-						</td>
+					</td>
 				{%endif%}
-			</tr>
-			{% endfor %}
+			{% endfor %}				
+			
 		</tbody> 
 	</table>
+
+
 {% endblock %}
 
-{% block extra_footer %}
-
-    <script>
-
-        var tipo = $('#{{seleccion}}');
-        console.log(tipo);
-
-        function set_filters() {
-
-            if (tipo.val()!='' && anho_base.val()!='' && periodo_trimestre_ini.val()!='' && periodo_trimestre_fin.val()!='' && periodo_anho_ini.val()!='' && periodo_anho_fin.val()!=''){
-
-                if (tipo.val() == 'DG'){
-
-                    if (parseInt(periodo_anho_fin.val()) == parseInt(periodo_anho_ini.val()) && parseInt(periodo_trimestre_ini.val()) <= parseInt(periodo_trimestre_fin.val())){
-                    
-                        document.getElementById('oculto').style.display = 'block';
-                    }
-
-                }
-                else{
-                    //bootbox.alert('Verificar su selección');
-                    document.getElementById('oculto').style.display = 'none';
-                }
-            }
-        }
-
-        /**
-        * A medida que se realizan las selecciones voy modificando los filtros
-        */
-        $(document).ready(function() {
-            tipo.on('change', function() {set_filters()});
-        });
-        
-    </script>
-{% endblock %}

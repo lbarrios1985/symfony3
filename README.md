@@ -6,7 +6,7 @@ Instalación:
 
 1.- Dentro del Directorio raiz escribir el siguiente comando:
 	
-	composer install
+	composer update
 
 2.- Dentro del gestor, crear la base de datos a utilizar en el proyecto y configurar el archivo parameters.yml
 
@@ -20,4 +20,4 @@ Instalación:
 
 5.- Ir al navegador a la direccion:
 
-	http://127.0.0.1:8000/login
+	http://127.0.0.1:8000/

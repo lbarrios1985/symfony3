@@ -21,7 +21,11 @@
 				<td>{{per.nombre}}</td>
 				<td>
 					<a href="/persona/edit/{{per.id}}" class="btn btn-default"> Editar</a>
-					<a href="/persona/delete/{{per.id}}" class="btn btn-danger"> Eliminar</a>
+					{%if app.user.nombre!= per.nombre %}					
+						<a href="/persona/delete/{{per.id}}/0" class="btn btn-danger"> Eliminar</a>
+					{%else%}
+						<a href="/persona/delete/{{per.id}}/1" class="btn btn-danger"> Eliminar</a>
+					{%endif%}
 				</td>
 			</tr>
 			{% endfor %}

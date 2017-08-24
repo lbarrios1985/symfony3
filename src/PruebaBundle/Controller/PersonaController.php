@@ -187,17 +187,21 @@ class PersonaController extends Controller
 
 
 
-    public function deleteAction($id)
+    public function deleteAction($id,$admin)
     {
+        $authentificationUtils = $this->get("security.authentication_utils");
+        $error = $authentificationUtils->getLastAuthenticationError();
+        $lastUsername = $authentificationUtils->getLastUsername();
+
         $persona=$this->getDoctrine()
             ->getRepository('PruebaBundle:Persona')
             ->find($id);
         $personaCurso=$this ->getDoctrine()
             ->getRepository('PruebaBundle:PersonaCurso')
-            ->findOneByPersona($persona);
+            ->findByPersona($persona);
         $telefono=$this ->getDoctrine()
             ->getRepository('PruebaBundle:Telefono')
-            ->findOneByPersona($persona);
+            ->findByPersona($persona);
         $usuario=$this ->getDoctrine()
             ->getRepository('PruebaBundle:Usuario')
             ->findOneByPersona($persona);
@@ -206,13 +210,17 @@ class PersonaController extends Controller
         if ($persona!=null){
             if ($personaCurso!=null){
                 $em= $this -> getDoctrine()->getManager();
-                $em->remove($personaCurso);
-                $em->flush();
+                foreach ($personaCurso as $per) {
+                    $em->remove($per);
+                    $em->flush();
+                }
             }
             if ($telefono!=null){
                 $em= $this -> getDoctrine()->getManager();
-                $em->remove($telefono);
-                $em->flush();
+                foreach ($telefono as $tel) {
+                    $em->remove($tel);
+                    $em->flush();
+                };
             }
             $em= $this -> getDoctrine()->getManager();
             $em->remove($usuario);
@@ -227,12 +235,20 @@ class PersonaController extends Controller
                     'Persona eliminada'
             );
         }
-            $persona=$this->getDoctrine()
+        $persona=$this->getDoctrine()
             ->getRepository('PruebaBundle:Persona')
             ->findAll();
-            
+
+        if ($admin==0){
             return $this->redirectToRoute('prueba_homepage',array(
-                "persona" => $persona
-                ));
+                "persona" => $persona,
+                "error" => $error,
+                "last_username" => $lastUsername
+            ));
+        }
+        else{
+            $this->get('security.token_storage')->setToken(null);
+            return $this->redirectToRoute('logout');
+        }
     }
 }

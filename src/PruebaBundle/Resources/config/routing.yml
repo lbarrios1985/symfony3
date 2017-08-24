@@ -1,5 +1,5 @@
 login:
-  path: /login
+  path: /
   defaults: { _controller: PruebaBundle:Usuario:login}
 
 login_check:
@@ -22,9 +22,8 @@ edit_persona:
   defaults: { _controller: PruebaBundle:Persona:edit }
 
 delete_persona:
-  path: /persona/delete/{id}
-  defaults: { _controller: PruebaBundle:Persona:delete }
-
+  path: /persona/delete/{id}/{admin}
+  defaults: { _controller: PruebaBundle:Persona:delete, admin:0 }
 curso:
   path: /curso
   defaults: { _controller: PruebaBundle:Curso:default }
